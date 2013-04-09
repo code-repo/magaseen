@@ -1,0 +1,135 @@
+<!-- saved from url=(0022)http://internet.e-mail -->
+<script language="javascript" type="text/javascript" src="{$SITE_URL}script/message.js"></script>
+<script>//<![CDATA[{literal}
+	function confirmDelete()
+	{
+		if(confirm("Are you sure you want to delete?"))
+			return true;
+		else
+			return false;
+	}
+	function checkAll()
+	{
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]")
+			{
+				if(!document.frm.elements[i].disabled)
+				{
+					document.frm.elements[i].checked = document.frm.chkAll.checked;
+				}
+			}
+		}
+	}
+	function chkForm()
+	{
+		var totchecked=0;
+		flag = false;
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			alert("Please select at least one value to proceed.");
+			return false;
+		}
+		if(document.frm.selAction.value == 'delete')
+		{
+			return confirmDeletion();
+		}
+		return true;
+	}
+	function confirmDeletion()
+	{
+		flag =false;		
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(true == flag)
+		{
+			$action = confirm("Do you really want to delete the selected record(s)?");
+		}
+		if($action)
+		{
+			return true;
+		}
+		return false;
+	}
+	function validateForm()
+	{
+		if(trim(document.form1.txtCategory.value) == "")
+		{
+			alert("Please enter a category.");
+			document.form1.txtCategory.focus();
+			return false;
+		}
+		else
+			return true;
+	}
+//{/literal}]]></script>
+<h2>{$TOP_NAVIGATION}</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+
+<form name="form1" action="" method="post" onsubmit="return validateForm();">
+<input type="hidden" name="categoryid" value="{$CATEGORY_ID}">
+<div class="row pt20">
+	<label class="small_label">Add / Edit Category</label>
+	<input type="text" name="txtCategory"  class="txtbox" value="{$CATEGORY|htmlentities}" maxlength="50">&nbsp;&nbsp;&nbsp;<input type="submit" name="save" value=" Add / Edit " class="submit_button_ae" />
+</div>
+</form>
+{if $IS_RECORD == false}
+	<div class="w100p errMsg">No Record</div>
+{else}
+{if $ERROR_MSG}
+	<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+<div class="w100p">
+	<div class="new_rec"> </div>
+	<div class="paging_div">{$PAGING}</div>
+</div>
+<form name="frm" action="{$SITE_URL}product/adminindex.php?action=categorylist" method="post" onsubmit="return chkForm();">
+<input type="hidden" name="page" value="{$PAGE}">
+<table width="100%" cellpadding="0" cellspacing="0" class="grid">		
+<tr>
+	<th class="check_list"><input type="checkbox" name="chkAll" onclick="javascript:return checkAll();"></th>
+	<th>Category Title</th>
+	<th class="status"></th>
+</tr>			
+{section name=i loop = $ARR_CATEGORY_ID}
+<tr>
+	<td class="check_list"><input type="checkbox" name="chkPage[]" value="{$ARR_CATEGORY_ID[i]}" id="chkPage"></td>
+	<td>{$ARR_CATEGORY_TITLE[i]|stripslashes|truncate:40:"..."}</td>
+	<td class="status"><a href="{$SITE_URL}product/adminindex.php?action=categorylist&categoryid={$ARR_CATEGORY_ID[i]}&{$EXTRA_ATT}" border="0"><img src="{$ADMIN_GRAPHICS_URL}icon_edit.png" alt="Edit" title="Edit" border="0"></a>
+	<a href="{$SITE_URL}product/adminindex.php?action=deletecategory&categoryid={$ARR_CATEGORY_ID[i]}&{$EXTRA_ATT}" border="0" onclick="javascript:return confirm('Do you really want to delete user?');">
+	<img src="{$ADMIN_GRAPHICS_URL}icon_delete.png" alt="Delete" title="Delete" border="0" /></a>
+	{if $ARR_CATEGORY_STATUS[i] == 1}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_status.png" alt="Active" title="Active">
+	{else}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_inactive.gif" alt="Inactive" title="Inactive">
+	{/if}
+	</td>
+	
+</tr>			
+{/section}			
+</table>		
+{/if}
+  <!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+<div class="row active">
+<select name="selAction" class="left">
+	<option value="activate">Activate</option>
+	<option value="deactivate">Deactivate</option>
+	<option value="delete">Delete</option>
+</select>
+<input name="" type="submit" value="" class="go_btn left" />
+</div>
+</form>

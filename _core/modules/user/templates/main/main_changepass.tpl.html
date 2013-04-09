@@ -1,0 +1,32 @@
+<div class="heading">
+	<img src="{$GRAPHICS_URL}header_change_password.jpg" alt="Change Password" title="Change Password" />
+</div>
+<div class="progame-content">
+	<form name="frmLoginMain" id="userForm" method="post" action="" onsubmit="return validateLoginInner();">
+	<!-- <h4 class="contact_title"><em>Change Password</em></h4> -->
+	<table border="0" id="register" width="100%">
+	{if $MESSAGE}
+	<tr>
+		<td colspan="2" class="errMsg">{$MESSAGE}</td>
+	</tr>
+	{/if}
+	<tr>
+		<td width="25%">{$smarty.const.LBL_OLD_PASSWORD}*:</td>
+		<td width="75%"><input type="password" name="txtOldPassword" value="" maxlength="50" /> </td>
+	</tr>
+	<tr>
+		<td>{$smarty.const.LBL_NEW_PASSWORD}*:</td>
+		<td><input type="password" name="txtNewPassword" value="" maxlength="50" /></td>
+	</tr>
+	<tr>
+		<td>{$smarty.const.LBL_CONFIRM_PASSWORD}*:</td>
+		<td><input type="password" name="txtConfirmPassword" value="" maxlength="50" /></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" value="{$smarty.const.LBL_UPDATE}" name="form[Send]" id="Login" class="rsform-submit-button" />&nbsp;&nbsp;<input type="button" value="{$smarty.const.LBL_CANCEL}" class="submit_button_small" onclick="javascript:window.location='{$SITE_URL}user/';" />
+		</td>
+	</tr>
+</table>
+</form>
+</div>

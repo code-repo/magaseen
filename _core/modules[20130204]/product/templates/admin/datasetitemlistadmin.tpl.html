@@ -1,0 +1,120 @@
+<script language="javascript" type="text/javascript" src="{$SITE_URL}script/message.js"></script>
+<script>//<![CDATA[{literal}
+	function checkAll()
+	{
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]")
+			{
+				if(!document.frm.elements[i].disabled)
+				{
+					document.frm.elements[i].checked = document.frm.chkAll.checked;
+				}
+			}
+		}
+	}
+	function chkForm()
+	{
+		var totchecked=0;
+		flag = false;
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			alert("Please select at least one value to proceed.");
+			return false;
+		}
+		if(document.frm.selAction.value == 'delete')
+		{
+			return confirmDeletion();
+		}
+		return true;
+	}
+	function confirmDeletion()
+	{
+		flag =false;		
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(true == flag)
+		{
+			$action = confirm("Do you really want to delete the selected record(s)?");
+		}
+		if($action)
+		{
+			return true;
+		}
+		return false;
+	}
+//{/literal}]]></script>
+<h2>{$TOP_NAVIGATION}</h2>
+<form name="form1" action="" method="post"  enctype="multipart/form-data">
+<div class="row">
+	<label class="small_label" style="width:100%;padding-bottom:10px;">Add New Dataset Image tracker Name</label>
+</div>
+<div class="row">
+	<label class="small_label">Image tracker name:<span class="req">*</span></label>
+	<input type="text" name="vName" maxlength="50" value="{$DATA.vName|stripslashes|htmlentities}" />
+</div>
+<div class="row">
+	<label class="small_label">Image tracker thumbnail:<span class="req">*</span></label>
+	<input type="file" name="vObject" /> (Recomended Size: 200px x 200px)
+</div>
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" name="submit" value=" Upload " class="submit_button" onclick="document.getElementById('loader').style.display = 'block';" />	
+	<div id="loader"><img src="{$SITE_URL}graphics/admin/ajax-loader.gif" alt="Loading..." title="Loading..." /></div>
+</div>
+</form>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $ERROR_MSG}
+	<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+{if $IS_RECORD == false}
+	<div class="w100p errMsg">No Record</div>
+{else}
+<div class="w100p">
+	<div class="new_rec"><input type="button" name="cancel" value="&laquo; Back" onclick="window.location=('{$SITE_URL}product/adminindex.php?action=datasetlist&page={$PAGE}');" class="submit_button" /></div>
+	<div class="paging_div">{$PAGING}</div>
+</div>
+<form name="frm" action="" method="post" onsubmit="return chkForm();">
+<input type="hidden" name="page" value="{$PAGE}" />
+<table width="100%" cellpadding="0" cellspacing="0" class="grid">		
+<tr>
+	<th class="check_list"><input type="checkbox" name="chkAll" onclick="javascript:return checkAll();"></th>
+	<th>Image tracker name</th>
+	<th>Tracker thumbnail</th>
+	<th class="status">Delete</th>
+</tr>
+{section name=i loop = $ARR_DATA}
+<tr>
+	<td class="check_list"><input type="checkbox" name="chkPage[]" value="{$ARR_DATA[i].iId}" id="chkPage"></td>
+	<td>{$ARR_DATA[i].vName|stripslashes|htmlentities}</td>
+	<td><img src="{$SITE_URL}product/dataset/small/{$ARR_DATA[i].vImage}" /></td>
+	<td class="status" align="center"><a href="{$SITE_URL}product/adminindex.php?action=datasetitemlist&datasetid={$smarty.get.datasetid}&id={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0"><img src="{$ADMIN_GRAPHICS_URL}icon_edit.png" alt="Edit" title="Edit" border="0"></a>
+	<a href="{$SITE_URL}product/adminindex.php?action=deletedatasetitem&datasetid={$smarty.get.datasetid}&id={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0" onclick="javascript:return confirm('Do you really want to delete this record?');"><img src="{$ADMIN_GRAPHICS_URL}icon_delete.png" alt="Delete" title="Delete" border="0" /></a>
+	</td>
+</tr>			
+{/section}			
+</table>		
+<div class="row active">
+<select name="selAction" class="left">
+	{*<option value="activate">Activate</option>
+	<option value="deactivate">Deactivate</option>*}
+	<option value="delete">Delete</option>
+</select>
+<input name="" type="submit" value="" class="go_btn left" />
+</div>
+{/if}
+</form>

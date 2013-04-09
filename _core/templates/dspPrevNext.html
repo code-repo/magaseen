@@ -1,0 +1,31 @@
+<!-- saved from url=(0022)http://internet.e-mail -->
+{literal}
+<script language="JavaScript">
+function sub1(ext)
+{
+	document.location.href = '{/literal}{$SELF_ADDR}{literal}?page='+document.getElementById('pagenum').value+ext;
+	//alert(document.location.href);
+}
+</script>
+{/literal}
+<form method="post" action="#" name=""> 
+<div class="normal paging">
+	{if $PREV}
+		<span style="position:relative;top:1px;"><a href="{$FLINK}"><img src="{$ADMIN_GRAPHICS_URL}common/first.gif" title="First" alt="First" border="0" /></a></span> 
+		<span style="position:relative;top:1px;"><a href="{$prevLink}"><img src="{$ADMIN_GRAPHICS_URL}common/previous.gif" border="0" title="Previous" alt="Previous" /></a></span> 
+	{else}
+	<span style="position:relative;top:1px;"><img src="{$ADMIN_GRAPHICS_URL}common/first_disabled.gif" border="0" /></span>
+	<span style="position:relative;top:1px;"><img src="{$ADMIN_GRAPHICS_URL}common/previous_disabled.gif" border="0" /></span>
+	{/if}		
+	<span style="position:relative;top:-3px;">Page</span>&nbsp;<select name="pagenum" id="pagenum" onchange="sub1('{$Extra}')" class="selectBox" {$DISABLED}>
+	{html_options values=$VALS selected=$SELECTED output=$OUTPUT}
+	</select>  
+	{if $NEXT} 
+		<span style="position:relative;top:1px;"><a href="{$nextLink}"><img src="{$ADMIN_GRAPHICS_URL}common/next.gif" border="0" title="Next" alt="Next" /></a></span>
+		<span style="position:relative;top:1px;"><a href="{$pageLink}"><img src="{$ADMIN_GRAPHICS_URL}common/last.gif" border="0" title="Last" alt="Last" /></a></span>
+	{else}
+		<span style="position:relative;top:1px;"><img src="{$ADMIN_GRAPHICS_URL}common/next_disabled.gif" border="0" /></span>
+		<span style="position:relative;top:1px;"><img src="{$ADMIN_GRAPHICS_URL}common/last_disabled.gif" border="0" /></span> 
+	{/if}
+</div>
+</form>

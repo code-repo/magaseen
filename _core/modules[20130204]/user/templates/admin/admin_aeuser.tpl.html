@@ -1,0 +1,63 @@
+<!-- Include jQuery -->
+<script src="{$SITE_URL}script/admin/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>	
+<script src="{$SITE_URL}script/admin/checks.js" type="text/javascript" charset="utf-8"></script>	
+<!-- Include Core Datepicker JavaScript -->
+<h2>User Details</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $MESSAGE}
+<div class="w100p errMsg clear">{$MESSAGE}</div>
+{/if}
+<form name="frmRegister" method="post" action="" onsubmit="">
+	<div class="row">
+		<label class="small_label">First Name:<span class="req">*</span></label>
+		<input type="text" id="vFirstName" name="vFirstName" size="20" value="{$ARR_DATA.vFirstName|stripslashes|htmlentities}" maxlength="100" />
+	</div>
+	<div class="row">
+        <label class="small_label">Middle Name:</label>
+		<input type="text" id="vMiddleName" name="vMiddleName" size="20" value="{$ARR_DATA.vMiddleName|stripslashes|htmlentities}" maxlength="100"></div>
+	<div class="row">
+        <label class="small_label">Last Name:</label>
+		<input type="text" id="vLastName" name="vLastName" size="20" value="{$ARR_DATA.vLastName|stripslashes|htmlentities}" maxlength="100"></div>
+	<div class="row">
+        <label class="small_label">Email:<span class="req">*</span></label>
+		<input type="text" id="vEmail" name="vEmail" size="20" value="{$ARR_DATA.vEmail|stripslashes|htmlentities}" maxlength="100"></div>	
+	{if !$smarty.get.userid}
+	<div class="row">
+        <label class="small_label">Password:<span class="req">*</span></label>
+		<input type="password" id="vPassword" name="vPassword" size="20" value="{$ARR_DATA.vPassword|stripslashes|htmlentities}" maxlength="100" />
+	</div>
+	<div class="row">
+        <label class="small_label">Confirm Password:<span class="req">*</span></label>
+		<input type="password" id="vCPassword" name="vCPassword" size="20" value="{$ARR_DATA.vCPassword|stripslashes|htmlentities}" maxlength="100" />
+	</div>
+	{/if}
+	<div class="row">
+        <label class="small_label">Street address:<span class="req">*</span></label>
+		<input type="text" id="vStreet" name="vStreet" size="20" value="{$ARR_DATA.vStreet|stripslashes|htmlentities}" maxlength="100"></div>	
+	<div class="row">
+        <label class="small_label">Bldg/Floor/Suite:</label>
+		<input type="text" id="vSuite" name="vSuite" size="20" value="{$ARR_DATA.vSuite|stripslashes|htmlentities}" maxlength="100"></div>	
+	<div class="row">
+        <label class="small_label">City:<span class="req">*</span></label>
+		<input type="text" id="vCity" name="vCity" size="20" value="{$ARR_DATA.vCity|stripslashes|htmlentities}" maxlength="100"></div>	
+	<div class="row">
+        <label class="small_label">Zip Code:<span class="req">*</span></label>
+		<input type="text" id="vZip" name="vZip" size="20" value="{$ARR_DATA.vZip|stripslashes|htmlentities}" maxlength="8"></div>
+	<div class="row">
+        <label class="small_label">State:<span class="req">*</span></label>
+		<span id="states">{$STATES}</span>
+	</div>
+	<div class="row">
+        <label class="small_label">Country:<span class="req">*</span></label>
+		{$COUNTRIES}
+	</div>	
+	<div class="row">
+        <label class="small_label">Phone/Mobile:<span class="req">*</span></label>
+		<input type="text" id="vPhone" name="vPhone" size="20" value="{$ARR_DATA.vPhone|stripslashes|htmlentities}" maxlength="100">
+	</div>	
+	<div class="row">
+		<label class="small_label"></label>
+		<input type="submit" value="Save" class="submit_button" />
+		<input type="button" value="Cancel" class="submit_button" onclick="javascript:window.location='adminindex.php?action=userlist';" />
+	</div>
+</form>

@@ -1,0 +1,28 @@
+<h2>Administrator Login</h2>
+{if $MESSAGE}
+<div class="w100p errMsg clear">{$MESSAGE}</div>
+{/if}
+<form name="frm" action="{$SITE_URL}adminindex.php" method="post">
+<input type="hidden" name="action" value="checklogin" />
+<div class="row">
+	<label class="small_label">Email:<span class="req">*</span></label>
+	<input type="text" name="txtUserId" maxlength="50" />
+</div>
+<div class="row">
+	<label class="small_label">Password:<span class="req">*</span></label>
+	<input type="password" name="txtPassword" maxlength="50" />
+</div>
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" name="Submit" value="Sign-in" class="button" />
+</div>
+<div class="row">
+	<label class="small_label"></label>
+	<label class="">Forgot Password? <a href="{$SITE_URL}user/adminindex.php?action=forgotpass">Click Here</a></label>
+</div>
+</form>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+document.frm.txtUserId.focus();
+//-->
+</SCRIPT>

@@ -1,0 +1,61 @@
+<!-- Include jQuery -->
+<script src="{$SITE_URL}script/admin/jquery.js" type="text/javascript" charset="utf-8"></script>	
+<!-- Include Core Datepicker JavaScript -->
+<script src="{$SITE_URL}script/admin/ui.datepicker.js" type="text/javascript" charset="utf-8"></script>	
+<link rel="stylesheet" href="{$SITE_URL}css/admin/ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" />
+<h2>{$TOP_NAVIGATION}</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $ERROR_MSG}
+<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+<form name="frm" action="" method="post" enctype="multipart/form-data">
+<input type="hidden" name="colorid" value="{$COLOR_ID}">
+<div class="row">
+	<label class="small_label">Name:<span class="req">*</span></label>
+	<input type="text" name="vName" maxlength="50" value="{$DATA.vName|stripslashes|htmlentities}" />
+</div>
+<div class="row">
+	<label class="small_label">Client:<span class="req">*</span></label>
+	{$CLIENT}
+</div>
+<div class="row">
+	<label class="small_label">Campaign:<span class="req">*</span></label>
+	<span id="campaign"></span>
+	<input type="hidden" name="camp_id" id="camp_id" value="{$DATA.iCampaignId}">
+</div>
+<div class="row">
+	<label class="small_label">Category:<span class="req">*</span></label>
+	{$CATEGORIES}
+</div>
+<div class="row">
+	<label class="small_label">Description:<span class="req">*</span></label>
+	<textarea name="vDescription" rows="5">{$DATA.vDescription|stripslashes}</textarea>
+</div>	
+<div class="row">
+	<label class="small_label">Start Date:<span class="req">*</span></label>
+	<input type="text" name="dStartDate" id="dStartDate" value="{$DATA.dStartDate}" readonly="readonly" />
+</div>
+<div class="row">
+	<label class="small_label">End Date:<span class="req">*</span></label>
+	<input type="text" name="dEndDate" id="dEndDate" value="{$DATA.dEndDate}" readonly="readonly" />
+</div>
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" name="submit" value="Save" class="submit_button" />
+	<input type="button" name="cancel" value="Cancel" onclick="window.location=('{$SITE_URL}product/adminindex.php?action=contentlist&page={$PAGE}');" class="submit_button" />
+</div>
+</form>
+
+<!-- Attach the datepicker to dateinput after document is ready -->
+<script type="text/javascript" charset="utf-8">
+{literal}
+jQuery(function($){$("#dStartDate").attachDatepicker({showOn: 'button', buttonImage: '{/literal}{$ADMIN_GRAPHICS_URL}{literal}CalendarLogo.jpg', buttonImageOnly: true,yearRange:'-2:+5',fileds_to_hide:''});});
+{/literal}
+</script>
+<!-- Attach the datepicker to dateinput after document is ready -->
+<script type="text/javascript" charset="utf-8">
+{literal}
+jQuery(function($){$("#dEndDate").attachDatepicker({showOn: 'button', buttonImage: '{/literal}{$ADMIN_GRAPHICS_URL}{literal}CalendarLogo.jpg', buttonImageOnly: true,yearRange:'-2:+5', fileds_to_hide:''});});
+setCampaign({/literal}{$DATA.iClientId}{literal});
+{/literal}
+</script>

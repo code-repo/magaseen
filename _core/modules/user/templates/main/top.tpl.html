@@ -1,0 +1,17 @@
+<!-- xxxxxxxxxxxxxxxxxx Header xxxxxxx -->
+<div id="header"> <a href="{$SITE_URL}" id="logo"><img src="{$SITE_URL}graphics/main/logo.png" alt="" /></a>
+  <!-- xxxxx Signout xxxxxxx -->
+  <div class="signout_btn"><a href="{$SITE_URL}user/index.php?action=logout">Sign Out</a>
+  {if $smarty.session.client.iId}<br />ID #{$smarty.session.client.iId}{/if}</div>
+  <!-- xxxxx //Signout xxxxxxx -->
+</div>
+	<!-- <h1><a href="{$smarty.const.SITE_URL}">{$smarty.const.SITE_TITLE} Client Section</a></h1>
+	{if $smarty.session.sesUserName}
+	<ul>
+		<li>{$smarty.const.LBL_WELCOME} <i>{$smarty.session.sesUserName}</i></li>
+		<li><a href="{$SITE_URL}user/index.php?action=profile">{$smarty.const.LBL_MY_PROFILE}</a></li>
+		<li><a href="{$SITE_URL}user/index.php?action=changepass">{$smarty.const.LBL_CHANGE_PASSWORD}</a></li>
+		<li><a href="{$SITE_URL}user/index.php?action=logout">{$smarty.const.LBL_LOGOUT}</a>
+	</ul>
+	{/if}
+</div> -->

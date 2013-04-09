@@ -1,0 +1,46 @@
+<div id="content_area">
+	<!-- xxxxx Title Bar xxxxxxx -->
+	<div class="title_bar">
+	<!-- xxxxx Left Area xxxxxxx -->
+	<div class="left_area">
+	<h1>Login</h1>
+	</div>
+	</div>
+	<div class="clear"></div>
+	<!-- xxxxx //Title Bar xxxxxxx -->
+	<!-- xxxxxxxxxxxx Left Area xxxxxxxxxxxx -->
+	<div class="left_area">
+		<div class="content">
+		<form name="frmLoginMain" id="userForm" method="post" action="" onsubmit="return validateLoginInner();">
+		<table border="0" id="register" width="100%">
+			{if $MESSAGE}
+			<tr>
+				<td colspan="2" class="errMsg">{$MESSAGE}</td>
+			</tr>
+			{/if}
+			<tr>
+				<td colspan="2">{$smarty.const.LOGIN_TEXT}</td>
+			</tr>
+			<tr>
+				<td width="25%">{$smarty.const.LBL_EMAIL}*:</td>
+				<td width="75%"><input type="text" name="txtUserId" maxlength="50" /> </td>
+			</tr>
+			<tr>
+				<td>{$smarty.const.LBL_PASSWORD}*:</td>
+				<td><input type="password" name="txtPassword" maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Login" name="form[Send]" id="Login" class="rsform-submit-button" />{*
+				<br /><br />New User? <a href="{$SITE_URL}user/index.php?action=register">click here</a> to Register<br />
+				Forgot Password? <a href="{$SITE_URL}user/index.php?action=forgot">click here</a>*}
+				</td>
+			</tr>
+		</table>
+		</form>
+		<div class="clear"></div>
+		</div>
+	<!-- xxxxxx //Content xxxxxx -->
+	</div>
+	<div class="clear"></div>
+</div>

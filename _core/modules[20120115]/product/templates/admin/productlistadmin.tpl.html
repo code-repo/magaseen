@@ -1,0 +1,128 @@
+<script language="javascript" type="text/javascript" src="{$SITE_URL}script/message.js"></script>
+<script>//<![CDATA[{literal}
+	function checkAll()
+	{
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]")
+			{
+				if(!document.frm.elements[i].disabled)
+				{
+					document.frm.elements[i].checked = document.frm.chkAll.checked;
+				}
+			}
+		}
+	}
+	function chkForm()
+	{
+		var totchecked=0;
+		flag = false;
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			alert("Please select at least one value to proceed.");
+			return false;
+		}
+		if(document.frm.selAction.value == 'delete')
+		{
+			return confirmDeletion();
+		}
+		return true;
+	}
+	function confirmDeletion()
+	{
+		flag =false;		
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(true == flag)
+		{
+			$action = confirm("Do you really want to delete the selected record(s)?");
+		}
+		if($action)
+		{
+			return true;
+		}
+		return false;
+	}
+//{/literal}]]></script>
+<h2>{$TOP_NAVIGATION}</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $smarty.session.user.vType != 'C'}
+<form name="client_frm" action="adminindex.php?action=productlist">
+<div class="row">
+	<b>Show campaigns for client: </b> 
+	<select name="client_id" onchange="location.href='{$SITE_URL}product/adminindex.php?action=productlist&client_id='+this.value;">
+	<option value="0">All</option>
+	{html_options values=$VALS selected=$SELECTED output=$OUTPUT}
+	</select>
+</div>
+</form>
+{/if}
+<div class="w100p">
+	<div class="new_rec">{if $smarty.session.user.vType != 'C'}[<a href="{$SITE_URL}product/adminindex.php?action=aeproduct"><b>Add Campaign</b></a>]{/if}</div>
+	<div class="paging_div">{$PAGING}</div>
+</div>
+{if $IS_RECORD == false}
+	<div class="w100p errMsg">No Record</div>
+{else}
+{if $ERROR_MSG}
+	<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+<form name="frm" action="" method="post" onsubmit="return chkForm(); ">
+<input type="hidden" name="page" value="{$PAGE}" />
+<table width="100%" cellpadding="0" cellspacing="0" class="grid">		
+<tr>
+	<th class="check_list">{if $smarty.session.user.vType != 'C'}<input type="checkbox" name="chkAll" onclick="javascript:return checkAll();">{/if}</th>
+	<th>Name</th>
+	{if $smarty.session.user.vType != 'C'}<th>Client</th>{/if}
+	<th>Start Date</th>					
+	<th>End Date</th>					
+	<th class="status">Status</th>
+</tr>
+{section name=i loop = $ARR_DATA}
+<tr>
+	<td class="check_list">{if $smarty.session.user.vType != 'C'}<input type="checkbox" name="chkPage[]" value="{$ARR_DATA[i].iId}" id="chkPage">{/if}&nbsp;</td>
+	<td>{$ARR_DATA[i].vName|stripslashes|htmlentities}</td>
+	{if $smarty.session.user.vType != 'C'}<td>{$ARR_DATA[i].client|stripslashes|truncate:30:"..."}</td>{/if}
+	<td>{$ARR_DATA[i].dStartDate|date_format:'%d/%m/%y'}</td>
+	<td>{$ARR_DATA[i].dEndDate|date_format:'%d/%m/%y'}</td>
+	<td class="status">
+	{if $smarty.session.user.vType != 'C'}
+	<a href="{$SITE_URL}product/adminindex.php?action=aeproduct&productid={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0"><img src="{$ADMIN_GRAPHICS_URL}icon_edit.png" alt="Edit" title="Edit" border="0"></a>
+	<a href="{$SITE_URL}product/adminindex.php?action=deleteproduct&productid={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0" onclick="javascript:return confirm('Do you really want to delete this record?');">
+	<img src="{$ADMIN_GRAPHICS_URL}icon_delete.png" alt="Delete" title="Delete" border="0" /></a>
+	{/if}
+	{if $ARR_DATA[i].iActive == 1}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_status.png" alt="Active" title="Active">
+	{else}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_inactive.gif" alt="Inactive" title="Inactive">
+	{/if}
+	</td>
+</tr>			
+{/section}			
+</table>		
+<div class="row active">
+{if $smarty.session.user.vType != 'C'}
+<select name="selAction" class="left">
+	<option value="activate">Activate</option>
+	<option value="deactivate">Deactivate</option>
+	<option value="delete">Delete</option>
+</select>
+<input name="" type="submit" value="" class="go_btn left" />
+{/if}
+{/if}
+</div>
+</form>

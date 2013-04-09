@@ -1,0 +1,565 @@
+/*
+	AnythingSlider v1.7+ Default (base) theme
+	By Chris Coyier: http://css-tricks.com
+	with major improvements by Doug Neiner: http://pixelgraphics.us/
+	based on work by Remy Sharp: http://jqueryfordesigners.com/
+*/
+
+/*****************************
+  SET DEFAULT DIMENSIONS HERE
+ *****************************/
+/*------------ Service slider -------------*/
+.services_cont{
+}
+.services_cont .anythingSlider {
+	display: block;
+	overflow: visible !important; /* needed for Opera and Safari */
+	position: relative;
+	padding: 0px;
+	height:371px!important;
+	width:914px!important;
+}
+.services_cont .anythingBase .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+		height:371px!important;
+	width:914px!important;
+}
+.services_cont .arrow a {
+	background:url(../../graphics/main/service_slidearrow.jpg) no-repeat;
+display: block;
+    height: 31px;
+    margin: 0 0 0;
+    overflow: hidden;
+    text-align: center;
+    text-indent: 22px;
+    width: 22px;
+}
+.services_cont .arrow {
+  display: block;
+    position: absolute;
+    right: 0;
+    top: -14%;
+}
+.services_cont .back{
+}
+.services_cont .forward{
+    right: -23px;
+}
+.services_cont .forward a{
+  background-position: -27px 0;
+}
+/*------------ /Service slider -------------*/
+/*------------ RecentProject -------------*/
+
+
+
+.recentproject_img_cont .anythingSlider {
+	display: block;
+	overflow: visible !important; /* needed for Opera and Safari */
+	position: relative;
+	padding: 0px;
+	height:262px!important;
+	width:490px!important;
+}
+.recentproject_img_cont .anythingBase .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+height:262px!important;
+	width:490px!important;
+}
+.recentproject_img_cont .arrow a {
+     display: block;
+    height: 42px;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    text-indent: 42px;
+    width: 36px;
+}
+.recentproject_img_cont .arrow {
+  display: block;
+    position: absolute;
+	padding:0px!important;
+	 margin-top: 87px;
+    right: -49px;
+    top: 0;
+}
+.recentproject_img_cont .back a{
+	background:url(../../graphics/main/recentp_arrow_left.png) no-repeat;
+}
+.recentproject_img_cont .forward{
+   margin-top: 132px;
+}
+.recentproject_img_cont .forward a{
+	background:url(../../graphics/main/recentp_arrow_right.png) no-repeat;
+}
+/*------------ /RecentProject -------------*/
+/*------------ special_logo -------------*/
+.special_logo .anythingSlider {
+	display: block;
+	overflow: visible !important; /* needed for Opera and Safari */
+	position: relative;
+	padding: 0px;
+	height:78px!important;
+	width:924px!important;
+}
+.special_logo .anythingBase .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+height:78px!important;
+	width:959px!important;
+}
+.special_logo .arrow a {
+	background:url(../../graphics/main/specialization_arrow.png) no-repeat;
+ display: block;
+    height: 22px;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    text-indent: 42px;
+    width: 15px;
+}
+.special_logo .arrow {
+ display: block;
+    margin-top: -50px;
+    padding: 0 !important;
+    position: absolute;
+    right: -20px;
+    top: 0;
+}
+
+.special_logo .forward{
+   right: -41px;
+}
+.special_logo .forward a{
+background-position: -21px 0;
+}
+.special_logo li a:last-child{
+margin-right: 9px;
+}
+/*------------ /special_logo -------------*/
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper: 45px right & left padding for the arrows, 28px @ bottom for navigation */
+/* anythingSlider viewport window */
+div.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* anythingSlider base (original element) */
+.anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+/* all panels inside the slider */
+
+.anythingBase .panel.vertical {
+	float: none;
+}
+
+.anythingControls{
+display:none!important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	SLIDER
+/*-----------------------------------------------------------------------------------*/
+
+.jquery-slider-wrapper
+{
+   clear: both;
+    height: 288px !important;
+    margin-bottom: 20px;
+    position: relative;
+    width: 288px !important;
+	
+}
+.jquery-slider-wrapper .slider {
+ height: 288px!important;
+    overflow: hidden;
+    position: relative;
+    width: 288px!important;
+	}
+
+.jquery-slider-slide
+{
+  display: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+   
+}
+
+.jquery-slider-slide img
+{
+  border:0;
+  margin:0;
+  padding:0;
+}
+
+.jquery-slider-slide-current
+{
+  display:block;
+  z-index:2;
+}
+
+.jquery-slider-slide-next
+{
+  display:block;
+  z-index:1;
+}
+
+.jquery-slider-selectors
+{
+  display:block;
+  overflow:hidden;
+  position:absolute;
+  bottom:15px;
+  right:15px;
+  z-index:3;
+}
+
+.jquery-slider-selector
+{
+  background:url(../../graphics/main/slider-navi.png) no-repeat top;
+  display:inline;
+  float:left;
+  width:12px;
+  height:12px;
+  margin:0 0 0 3px;
+}
+
+.jquery-slider-selector-current
+{
+  background:url(../../graphics/main/slider-navi.png) no-repeat bottom;
+}
+
+.jquery-slider-selector span
+{
+  display:none;
+}
+
+.jquery-slider-hovered .jquery-slider-control
+{
+  display:block;
+}
+
+.jquery-slider-navigation
+{
+  display:block;
+}
+
+.jquery-slider-navigation-prev
+{
+  background: transparent url(../../graphics/main/slider-controls.png) no-repeat left top;
+  display:none;
+  left:15px;
+  top:50%;
+  position:absolute;
+  cursor: pointer;
+  margin-top:-12px;
+  z-index:4;
+  	width:25px;
+  	height:25px;
+}
+
+.jquery-slider-navigation-prev span
+{
+  display:none;
+}
+
+.jquery-slider-navigation-next
+{
+   background: transparent url(../../graphics/main/slider-controls.png) no-repeat right top;
+  display:none;
+  right:15px;
+  top:50%;
+  position:absolute;
+  cursor: pointer;
+  width:25px;
+  height:25px;
+  margin-top:-12px;
+  z-index:4;
+}
+
+.jquery-slider-navigation-next span
+{
+  display:none;
+}
+
+.jquery-slider-hovered .jquery-slider-navigation-prev,
+.jquery-slider-hovered .jquery-slider-navigation-next
+{
+  display:block;
+}
+
+.jquery-slider-wrapper .caption
+{
+  font-size:13px;
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  max-width: 80%;
+}
+
+.jquery-slider-wrapper .caption h3
+{
+  padding:5px 10px;
+  background:#FFF;
+  text-shadow: none;
+  display: inline-block;
+  margin: 0 0 5px 0;
+}
+
+.jquery-slider-wrapper .caption p
+{
+  padding:5px 10px;
+  margin: 0;
+  background:#FFF;
+  text-shadow: none;
+}
+
+.jquery-slider-timer-bar
+{
+  display: none;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Fancybox
+/*-----------------------------------------------------------------------------------*/
+#fancybox-loading {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	margin-left: -20px;
+	cursor: pointer;
+	overflow: hidden;
+	z-index: 1104;
+	display: none;
+}
+
+#fancybox-loading div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 480px;
+	background-image: url('fancybox.png');
+}
+
+#fancybox-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1100;
+	display: none;
+	background-image:url(../../graphics/main/popup_bg.png);
+}
+
+#fancybox-tmp {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	overflow: auto;
+	display: none;
+}
+
+#fancybox-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 20px;
+	z-index: 1101;
+	outline: none;
+	display: none;
+}
+
+#fancybox-outer {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-moz-box-shadow: 0px 0px 12px #000;
+	-webkit-box-shadow: 0px 0px 12px #000;
+	box-shadow: 0px 0px 12px #000;
+	border:6px solid #e7c8bc;
+}
+
+#fancybox-content {
+	width: 0;
+	height: auto!important;
+	padding: 0;
+	outline: none;
+	position: relative;
+	overflow: hidden;
+	z-index: 1102;
+	border: 0px;
+}
+
+#fancybox-hide-sel-frame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	z-index: 1101;
+}
+
+#fancybox-close {
+
+    background:url(../../graphics/main/close_btn.png) no-repeat;
+	cursor: pointer;
+  height: 39px;
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    width: 39px;
+    z-index: 1103;
+}
+#fancybox-title{
+display:none!important;
+}
+
+#fancybox-error {
+	color: #444;
+	font: normal 12px/20px Arial;
+	padding: 14px;
+	margin: 0;
+}
+
+#fancybox-img {
+
+	border: none;
+	height: auto!important;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    padding: 22px 0 22px 21px;
+    vertical-align: top;
+    width: 98%;
+}
+
+#fancybox-frame {
+	width: 100%;
+	height: 100%;
+	border: none;
+	display: block;
+}
+
+#fancybox-left, #fancybox-right {
+	position: absolute;
+	top: 0px;
+	height: 83%;
+	width: 7%;
+	cursor: pointer;
+	outline: none;
+	background: transparent url('blank.gif');
+	z-index: 1102;
+	display: none;
+}
+
+#fancybox-left {
+	left: 0px;
+}
+
+#fancybox-right {
+	right: 0px;
+}
+
+#fancybox-left-ico, #fancybox-right-ico {
+	position: absolute;
+	top: 50%;
+	left: -9999px;
+	width: 55px;
+	height: 115px;
+	margin-top: -15px;
+	cursor: pointer;
+	z-index: 1102;
+	display: block;
+}
+
+#fancybox-left-ico {
+    background: url(../../graphics/main/popup_leftright_btn.png) no-repeat 0px 0px;
+}
+
+#fancybox-right-ico {
+    background: url(../../graphics/main/popup_leftright_btn.png) no-repeat -46px 0px;
+}
+
+#fancybox-left:hover, #fancybox-right:hover {
+	visibility: visible; /* IE6 */
+}
+
+#fancybox-left:hover span {
+	left: -3px;
+}
+
+#fancybox-right:hover span {
+	left: auto;
+	right: -6px;
+}
+
+.fancybox-bg {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	z-index: 1001;
+}
+
+/*-------------------- Gallery --------------*/
+.gallery_cont .anythingSlider {
+	height:461px!important;
+	  padding: 0 9px 0 0;
+	width:970px!important;
+}
+.gallery_cont .anythingBase .panel {
+	padding: 0;
+	margin: 0;
+	height:450px!important;
+	width:970px!important;
+}
+.gallery_cont .forward {
+    right: 29px;
+}
+.gallery_cont .back {
+    right: 50px;
+}
+.gallery_cont .arrow {
+    top: 0;
+}

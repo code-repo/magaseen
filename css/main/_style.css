@@ -1,0 +1,174 @@
+*{margin:0;padding:0; text-decoration:none; border:none; outline:none;}
+body{font-family:Arial,Helvetica,sans-serif; font-size:12px;}
+h1, h2, h3{margin-bottom:20px;}
+#main{width:1024px; margin:0px auto; }
+#wrapper{width:100%; border: 1px solid #4994ce;float:left;}
+.container{background:#fff; clear:both; float:left; width:94%; padding:3%; min-height:400px;}
+#header{padding:2%; width:96%;background-color:#4994ce; color:#FFFFFF;}
+#header a{color:#FFFFFF;}
+#header ul{float:right;}
+#header ul li{ float: left;
+    list-style-type: square;
+    margin-left: 20px;
+    padding-left: 0;}
+#footer{padding:2%; float:left; color:#555555; width:96%; background-color:#4994ce;text-align:center; font-size:16px; color:#FFF;}
+
+#contentLeft{width:65%;float:left;}
+#contentRight{width:33%;float:left;padding-left:2%;}
+
+.small_label {
+	width:180px;
+	font-size:14px;
+	font-weight:bold;
+	text-shadow:1px 1px 1px #fff;
+	float: left;
+	}
+	
+.row {
+	float:left;
+	width:100%;
+	}
+	
+	input[type="button"], input[type="submit"] {
+	text-align:center;
+	font-family:Helvetica, Arial;
+	font-weight:bold;
+	text-shadow:1px 1px 1px #000;
+	background:url(../../graphics/admin/btn_bg.gif) repeat-x;
+	padding:6px 20px;
+	margin-right:20px;
+	font-size:16px;
+	color:#fff;
+	border:none;
+	border-radius:20px;
+	box-shadow: 1px 1px 1px #000 inset;
+	cursor:pointer;
+	}
+	
+	textarea {
+	height:60px;
+	}
+input[type="text"], input[type="password"], textarea, select {
+	border-radius:9px;
+	padding:7px;
+	box-shadow:1px 1px 1px #141414 inset;
+	border:1px solid #c7d8e8;
+	background:#fff;
+	width:300px;
+	font:14px Arial, Helvetica, sans-serif;
+	color:#434646;
+	margin-bottom:10px;
+	}
+select { width:315px }
+.req , .errMsg{
+	color:#FF0000;
+	}
+#content{float:left; width:100%;}
+
+ul.applist{ float: left; width:250px; border: 1px solid #000;}
+ul.applist li{ cursor:pointer; list-style-type: square; margin: 10px 20px; padding-left: 0; color:#286897;}
+ul.applist a{ color:#286897;text-decoration:underline;}
+ul.applist a:hover{text-decoration:none;}
+ 
+ 
+ 
+.sprited {
+    background: url(../../graphics/main/download_sprite.png) no-repeat;
+    line-height: 1000px;
+    overflow: hidden;
+    display: block;
+}
+#sign_up {
+	-moz-border-radius: 6px;
+	background: #eef2f7;
+	-webkit-border-radius: 6px;
+	border: 1px solid #536376;
+	-webkit-box-shadow: rgba(0,0,0,.6) 0px 2px 12px;
+	-moz-box-shadow:  rgba(0,0,0,.6) 0px 2px 12px;;
+	padding: 14px 22px;
+	width: 550px;
+	position: relative;
+	display: none;
+}
+#sign_up #sign_up_form {
+	margin-top: 13px;
+}
+#sign_up label {
+	display: block;
+	margin-bottom: 10px; 
+	color: #536376;
+	font-size: .9em;
+}
+
+#sign_up label input {
+	display: block;
+	width: 390px;
+	height: 31px;
+	background-position: -201px 0;
+	padding: 2px 8px;
+	font-size: 1.2em;
+	line-height: 31px;
+}
+
+
+#see_id {
+	width: 228px;
+	height: 23px;
+	background-position: -202px -133px;
+}
+#left_out {
+	background-position: -202px -158px;
+	width: 113px; height: 16px;
+}
+#sign_up_form {
+	position: relative;
+	background: url(divider.png) repeat-x bottom left;
+	padding-bottom: 54px;
+	margin-bottom: 12px;
+}
+#actions {
+	float: left;
+	position: absolute;
+	right: 0;
+	height: 31px;
+	bottom: 20px;
+}
+a.form_button {
+	float: left;
+	width: 93px; height: 31px;
+	margin-right: 15px;
+}
+#cancel { background-position: -198px -36px; }
+#add_magazine { background-position: -291px -36px; }
+#cancel:hover { background-position: -198px -67px; }
+#cancel:active { background-position: -198px -98px; }
+#add_magazine:hover { background-position: -291px -67px; }
+#add_magazine:active { background-position: -291px -98px; }
+#close_x { 
+	width: 24px; height: 23px;
+	overflow: hidden; line-height: 1000px;
+	display: block;
+	position: absolute; top: 5px; right: 5px;
+	background-position: -387px -102px;
+}
+#usage { background-position: -323px -172px; width: 67px; height: 22px;}
+
+#output{color:red;}
+.title{font-size:14px; color: #286897; font-weight:bold; width:100%; padding-bottom:10px;}
+
+.magazine{width:96%; padding:2%; border: 1px solid #000; float:left;margin:6px 0;}
+.magazine img{float:left;}
+.magazine span{float:left; margin:65px 0 0 20px; font-size:20px;}
+.upload_form{width:325px; float:left;}
+.image_preview{text-align:center; width:210px;height:162px; float:left;padding:2px; border: 1px solid #CCCCCC;}
+
+.datepicker_header select {
+    height: 20px;
+    padding: 0;
+    width: 90px;
+}
+.pub{float:left; width:150px; height:150px; margin-right:10px;border:1px solid #CCCCCC;}
+.pub_main{width:100%; overflow:auto; float:left; border:1px solid #286897; padding:10px; margin-top:20px;}
+.media_left{width:25%; float:left; border:1px soild #CCCCCC;}
+.media_center{width:50%; float:left; border:1px soild #CCCCCC;}
+.media_right{width:25%; float:left; border:1px soild #CCCCCC;}

@@ -1,0 +1,127 @@
+<script>//<![CDATA[{literal}
+	function checkAll()
+	{
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]")
+			{
+				if(!document.frm.elements[i].disabled)
+				{
+					document.frm.elements[i].checked = document.frm.chkAll.checked;
+				}
+			}
+		}
+	}
+	function chkForm()
+	{
+		var totchecked=0;
+		flag = false;
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			alert("Please select at least one value to proceed.");
+			return false;
+		}
+		if(document.frm.selAction.value == 'delete')
+		{
+			return confirmDeletion();
+		}
+		return true;
+	}
+	function confirmDeletion()
+	{
+		flag =false;		
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(true == flag)
+		{
+			$action = confirm("Do you really want to delete the selected record(s)?");
+		}
+		if($action)
+		{
+			return true;
+		}
+		return false;
+	}
+//{/literal}]]></script>
+<form name="search_form" action="{$SITE_URL}user/adminindex.php?action=searchclient" method="post">
+<div class="search_bar">
+<input name="" type="button" class="right" onclick="this.form.submit();" />
+<input type="text" name="txtSearch" maxlength="50" value="{$SEARCH_KEYWORD|stripslashes|htmlentities}" class="right" />
+</div>
+</form>
+<!-- xxxxxxxxx Search Bar xxxxxxxxx -->
+<div class="clear"></div>
+<h2>{$TOP_NAVIGATION}</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+<div class="w100p">
+	<div class="new_rec">[<a href="{$SITE_URL}user/adminindex.php?action=aeclient"><b>Add Client</b></a>]</div>
+	<div class="paging_div">{$PAGING}</div>
+</div>
+{if $IS_RECORD == false}
+	<div class="w100p errMsg">No Record</div>
+{else}
+{if $ERROR_MSG}
+	<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+
+<form name="frm" action="{$SITE_URL}user/adminindex.php?action={if $SEARCH_KEYWORD}searchclient&txtSearch={$SEARCH_KEYWORD}{else}clientlist{/if}" method="post" onsubmit="return chkForm(); ">
+<input type="hidden" name="page" value="{$PAGE}">
+<table width="100%" cellpadding="0" cellspacing="0" class="grid">		
+<tr>
+	<th class="check_list"><input type="checkbox" name="chkAll" onclick="javascript:return checkAll();"></th>
+	<th>Client Name</th>
+	<th>Email</th>
+	<th>Apps</th>
+	<th>Slots</th>
+	<th>Reg Date</th>					
+	<th class="status">Status</th>
+</tr>
+{section name=row loop = $ARR_DATA}
+<tr>
+	<td class="check_list"><input type="checkbox" name="chkPage[]" value="{$ARR_DATA[row].iId}" id="chkPage"></td>
+	<td>{$ARR_DATA[row].vName|stripslashes|htmlentities}</td>	
+	<td><a href="mailto:{$ARR_DATA[row].vEmail}">{$ARR_DATA[row].vEmail|truncate:30:"..."}</a></td>
+	<td align="center">[ <a href="{$SITE_URL}product/adminindex.php?action=applist&client_id={$ARR_DATA[row].iId}" title="Manage Apps">{$ARR_DATA[row].app_count}</a> ]</td>
+	<td align="center"><a href="{$SITE_URL}product/adminindex.php?action=slotlist&client_id={$ARR_DATA[row].iId}" title="Manage Slots">{$ARR_DATA[row].iTotalSlots}</a> | {$ARR_DATA[row].iConsumedSlots}</td>
+	<td>{$ARR_DATA[row].dRegDate|date_format:'%Y-%m-%d'}</td>
+	<td class="status"><a href="{$SITE_URL}user/adminindex.php?action=aeclient&clientid={$ARR_DATA[row].iId}&{$EXTRA_ATT}" border="0"><img src="{$ADMIN_GRAPHICS_URL}icon_edit.png" alt="Edit" title="Edit" border="0"></a>
+	<a href="{$SITE_URL}user/adminindex.php?action=deleteclient&clientid={$ARR_DATA[row].iId}&{$EXTRA_ATT}" border="0" onclick="javascript:return confirm('Do you really want to delete this record?');">
+	<img src="{$ADMIN_GRAPHICS_URL}icon_delete.png" alt="Delete" title="Delete" border="0" /></a>
+	{if $ARR_DATA[row].iActive == 1}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_status.png" alt="Active" title="Active">
+	{else}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_inactive.gif" alt="Inactive" title="Inactive">
+	{/if}
+	</td>
+</tr>
+<tr>
+	<td style="padding:0;background-color:#d5ffff;" colspan="6" align="center" id="campaign_{$ARR_DATA[row].iId}" class="campaign_rows"></td>
+</tr>
+{/section}			
+</table>		
+
+  <!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+<div class="row active">
+<select name="selAction" class="left">
+	<option value="activate">Activate</option>
+	<option value="deactivate">Deactivate</option>
+	<option value="delete">Delete</option>
+</select>
+<input name="" type="submit" value="" class="go_btn left" />
+</div>
+{/if}
+</form>

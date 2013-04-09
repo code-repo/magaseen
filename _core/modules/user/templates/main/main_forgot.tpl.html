@@ -1,0 +1,28 @@
+<div class="heading">
+	<img src="{$GRAPHICS_URL}forgot_password_header.gif" alt="Register" title="Register" />
+</div>
+<div class="progame-content">
+	<form name="frmLoginMain" id="userForm" method="post" action="" onsubmit="return validateLoginInner();">
+	<h4 class="contact_title"><em>{$smarty.const.LBL_FORGOT_PASSWORD}</em></h4>
+	<table border="0" id="register" width="100%">
+	<tr>
+		<td colspan="2">{$smarty.const.LBL_ENTER_EMAIL}</td>
+	</tr>
+	{if $MESSAGE}
+	<tr>
+		<td colspan="2" class="errMsg">{$MESSAGE}</td>
+	</tr>
+	{/if}
+	<tr>
+		<td width="25%">{$smarty.const.LBL_EMAIL}*:</td>
+		<td width="75%"><input type="text" name="txtEmail" value="" /> </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" value="Submit" name="form[Send]" class="rsform-submit-button" />
+		&nbsp;&nbsp;<input type="button" value="Cancel" class="submit_button_small" onclick="javascript:window.location='{$SITE_URL}user/';" />
+		</td>
+	</tr>
+	</table>
+	</form>
+</div>

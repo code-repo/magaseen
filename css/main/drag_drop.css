@@ -1,0 +1,141 @@
+body {
+	  text-align: center;
+	  margin:0px;
+	  padding:0px;
+}
+#wrapper {
+	  text-align: left;
+	  width: 720px;
+	  margin-left: auto;
+	  margin-right: auto;
+}
+
+.options{
+	width: 65px;
+	height:550px;
+	border:1px solid black;
+	float:left;
+}
+#titlex {
+	background-color:;
+	width: 100%;
+}
+
+#frame{
+	width:565px;
+	height:550px;
+	border:1px solid black;
+	background-color: #FAECCB;
+	/*background: no-repeat url("../images/map.jpg");
+	background-repeat: repeat-y;
+	background-position: 0 0;*/
+	position:relative;
+	float:right;
+	z-index:-1000000;
+}
+
+#frame2{
+	margin-left:9px;
+	width:125px;
+	height:450px;
+	border:1px solid black;
+	background-color: #D8EFC9;
+	position:relative;
+	float:right;
+	z-index:-1000000;
+}
+
+#frame3{
+	margin-top:9px;
+	width:575px;
+	height:90px;
+	border:1px solid black;
+	background-color: #DFF3F7;
+	/*background: no-repeat url("../images/map.jpg");
+	background-repeat: repeat-y;
+	background-position: 0 0;*/
+	position:relative;
+	float:right;
+	z-index:-1000000;
+}
+
+#tbldevs{
+	border:1px solid black;
+	width:80%;
+	margin-left:50px;
+	margin-top:10px;
+}
+
+#tbldevs th{
+	text-align:center;
+	height:50px;
+	width:50px;
+}
+
+#tbldevs td{
+	height:50px;
+}
+
+
+
+#drag1 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/1.png"); }
+#drag2 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/2.png"); }
+#drag3 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/3.png"); }
+#drag4 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/4.png"); }
+#drag5 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/5.png"); }
+#drag6 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/6.png"); }
+#drag7 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/7.png"); }
+#drag8 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/8.png"); }
+#drag9 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/9.png"); }
+#drag10 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/10.png"); }
+#drag11 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/11.png"); }
+#drag12 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/12.png"); }
+#drag13 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/13.png"); }
+#drag14 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/14.png"); }
+#drag15 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/15.png"); }
+#drag16 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/16.png"); }
+#drag17 { margin-left:15px; margin-top:15px; width:32px; height:32px; background-image: url("../images/17.png"); }
+
+
+.ui-draggable-helperMoving {
+	border: 1px dotted #000;
+	padding: 6px;
+	background: #fff;
+	font-size: 1.2em;
+	width:100px;
+	height:100px;
+}
+
+.ui-draggable-helperStoped {
+	border: 1px solid #000;
+	width:5px;
+	height:5px;
+}
+
+
+
+
+/* classes for dragged stuff */
+.dragged1 { position:absolute; width:32px; height:32px; background-image: url("../images/1.png"); }
+.dragged2 { position:absolute; width:32px; height:32px; background-image: url("../images/2.png"); }
+.dragged3 { position:absolute; width:32px; height:32px; background-image: url("../images/3.png"); }
+.dragged4 { position:absolute; width:32px; height:32px; background-image: url("../images/4.png"); }
+.dragged5 { position:absolute; width:32px; height:32px; background-image: url("../images/5.png"); }
+.dragged6 { position:absolute; width:32px; height:32px; background-image: url("../images/6.png"); }
+.dragged7 { position:absolute; width:32px; height:32px; background-image: url("../images/7.png"); }
+.dragged8 { position:absolute; width:32px; height:32px; background-image: url("../images/8.png"); }
+.dragged9 { position:absolute; width:32px; height:32px; background-image: url("../images/9.png"); }
+.dragged10 { position:absolute; width:32px; height:32px; background-image: url("../images/10.png"); }
+.dragged11 { position:absolute; width:32px; height:32px; background-image: url("../images/11.png"); }
+.dragged12 { position:absolute; width:32px; height:32px; background-image: url("../images/12.png"); }
+.dragged13 { position:absolute; width:32px; height:32px; background-image: url("../images/13.png"); }
+.dragged14 { position:absolute; width:32px; height:32px; background-image: url("../images/14.png"); }
+.dragged15 { position:absolute; width:32px; height:32px; background-image: url("../images/15.png"); }
+.dragged16 { position:absolute; width:32px; height:32px; background-image: url("../images/16.png"); }
+.dragged17 { position:absolute; width:32px; height:32px; background-image: url("../images/17.png"); }
+
+
+
+#element{
+	border:1px solid red
+}

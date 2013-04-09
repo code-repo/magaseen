@@ -1,0 +1,94 @@
+<div class="title_bar">
+        <!-- xxxxx Left Area xxxxxxx -->
+        <div class="left_area">
+          <h1>Revistas disponibles</h1>
+			{if $MESSAGE}
+				<span class="errMsg">{$MESSAGE}</span>
+			{/if}
+			<br /><br /><h4>Publicaciones (# {$smarty.session.client.iTotalSlots})</h4>
+        </div>
+        <!-- xxxxx //Left Area xxxxxxx -->
+        <!-- xxxxx Right Panel xxxxxxx -->
+        <div class="right_panel">
+          <div class="add_magazine_btn" id="pub_button"><a href="{$SITE_URL}product/index.php?action=addpub&m_id={$smarty.get.m_id}"><img src="{$SITE_URL}graphics/main/add_icon.png" alt="" /> <span>Agregar nueva publicacion</span></a> </div>
+          <div class="clear"></div>
+          <div class="search_box"><input name="" type="text" /><input name="" type="image" class="right" src="{$SITE_URL}graphics/main/search_btn.png" /></div>
+        </div>
+        <!-- xxxxx //Right Panel xxxxxxx -->
+      </div>
+      <div class="clear"></div>
+      <!-- xxxxx //Title Bar xxxxxxx -->
+       <!-- xxxxxxxxxxxx Left Area xxxxxxxxxxxx -->
+    <!-- xxxxxx Content xxxxxx -->
+    <div class="content">
+	{if $IS_RECORD}
+    <ul class="publication_list">
+	{section name=i loop = $ARR_DATA}
+    	<li>
+        <h4>{$ARR_DATA[i].vName}</h4>
+		<span class="green_txt">{$ARR_DATA[i].iMonth}</span><br/>
+        <a href="{$SITE_URL}product/index.php?action=addpub&id={$ARR_DATA[i].iId}&m_id={$smarty.get.m_id}"><!-- <img src="{$SITE_URL}graphics/main/cover_image.jpg" alt="" /> --><img src="{$SITE_URL}{if $ARR_DATA[i].vFile == ''}graphics/main/thumb_preview.png{else}product/publication/{$ARR_DATA[i].vFile}{/if}" alt="" /></a>
+        <div class="clear"></div>
+        <input type="button" class="left" value="{if $ARR_DATA[i].iPublished}Dejar de publicar{else}Publicar en app{/if}" name="" onclick="publish_publication('{$smarty.get.m_id}', {$ARR_DATA[i].iId}, {if $ARR_DATA[i].iPublished}0{else}1{/if})">
+		<input class="delete_icon" name="" onclick="delete_publication('{$smarty.get.m_id}', {$ARR_DATA[i].iId})" type="image" src="{$SITE_URL}graphics/main/delete_icon.png" />
+        </li>
+	{/section}
+    </ul>
+	{else}
+	No record.
+	{/if}
+    <div class="clear"></div>
+    </div>
+    
+
+
+<script src="{$SITE_URL}script/main/jquery.easing-1.3.min.js"></script>
+<script src="{$SITE_URL}script/main/jquery.jcarousel.min.js"></script>
+<script>
+{literal}
+(function() {
+
+		var $carousel = $('.publication_list');
+
+		if( $carousel.length ) {
+
+			var scrollCount;
+
+				scrollCount = 3;
+
+			$carousel.jcarousel({
+				animation : 600,
+				easing    : 'easeOutCubic',
+				scroll    : scrollCount
+			});
+
+			// Detect swipe gestures support
+			if( Modernizr.touch ) {
+				
+				function swipeFunc( e, dir ) {
+				
+					var $carousel = $(e.currentTarget);
+					
+					if( dir === 'left' ) {
+						$carousel.parent('.jcarousel-clip').siblings('.jcarousel-next').trigger('click');
+					}
+					
+					if( dir === 'right' ) {
+						$carousel.parent('.jcarousel-clip').siblings('.jcarousel-prev').trigger('click');
+					}
+					
+				}
+			
+				$carousel.swipe({
+					swipeLeft       : swipeFunc,
+					swipeRight      : swipeFunc,
+					allowPageScroll : 'auto'
+				});
+				
+			}
+
+		}
+
+	})();
+{/literal}
+</script>

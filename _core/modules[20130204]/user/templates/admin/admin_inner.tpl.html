@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_TITLE_ADMIN}</title>
+<link href="{$SITE_URL}css/admin/text.css" rel="stylesheet" type="text/css">
+<script src="{$SITE_URL}script/admin/jquery.js" type="text/javascript" charset="utf-8"></script>	
+<script type="text/javascript" src="{$SITE_URL}script/admin/checks.js"></script>
+<SCRIPT type="text/javascript" src="{$SITE_URL}script/admin/validation.js"></SCRIPT>
+<SCRIPT type="text/javascript">
+{literal}
+var siteurl = {/literal}'{$SITE_URL}'{literal};
+{/literal}
+</SCRIPT>
+</head>
+<div id="header">
+  <div class="wrap">
+    <div id="logo"><a href="{$SITE_URL}adminindex.php"><img src="{$ADMIN_GRAPHICS_URL}logo.png" alt="" /></a></div>
+    <div class="header_right">
+      <div class="welcome_msg"><span>Hi! {$smarty.session.user.vName}</span></div>
+      <div class="clear"></div>
+      <div class="top_title">{$smarty.const.SITE_TITLE_ADMIN}</div>
+    </div>
+    <div class="clear"></div>
+    <div id="main_nav">
+      <ul>
+        <li><a href="{$SITE_URL}adminindex.php">Home</a></li>
+        <li class="last"><a href="{$SITE_URL}user/adminindex.php?action=logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="main_title">
+    <h1>Neque Quisquam Dolorem Ipsum Quia Dolor Sit Consectetur</h1>
+  </div>
+  <!-- xxxxxxxxxxxxxxx Main Title xxxxxxxxxxx -->
+  <div class="content_area">
+    <div class="left_panel">
+      <ul>
+		{if $smarty.session.user.vType == 'SA'}
+        <li><a href="#">Client Management</a>
+          <ul>
+           {*<li><a href="{$SITE_URL}user/adminindex.php?action=userlist" class="left_nav_link {if $smarty.get.action == 'userlist' || $smarty.get.action == 'aeuser'}selected{/if}">Manage Users</a></li>*}
+            <li><a href="{$SITE_URL}user/adminindex.php?action=clientlist" class="left_nav_link {if $smarty.get.action == 'clientlist' || $smarty.get.action == 'aeclient'}selected{/if}">Manage Clients</a></li>
+          </ul>
+        </li>
+		{/if}
+		{*<li><a href="#">Campaign Management</a>
+          <ul>
+			<li><a href="{$SITE_URL}product/adminindex.php?action=productlist" class="left_nav_link {if $smarty.get.action == 'productlist' || $smarty.get.action == 'aeproduct'}selected{/if}">Manage Campaigns</a></li>
+			<li><a href="{$SITE_URL}product/adminindex.php?action=contentlist" class="left_nav_link {if $smarty.get.action == 'contentlist' || $smarty.get.action == 'aecontent'}selected{/if}">Manage Content</a></li>
+			<li><a href="{$SITE_URL}product/adminindex.php?action=datasetlist" class="left_nav_link {if $smarty.get.action == 'datasetlist' || $smarty.get.action == 'datasetitemlist'}selected{/if}">Manage Dataset</a></li>
+			{if $smarty.session.user.vType == 'SA' || $smarty.session.user.vType == 'TRD'}
+            <li><a href="{$SITE_URL}product/adminindex.php?action=categorylist" class="left_nav_link {if $smarty.get.action == 'categorylist'}selected{/if}">Manage Categories</a></li>
+			{/if}
+          </ul>
+        </li>*}
+		<li><a href="#">Settings</a>
+          <ul>
+            <li><a href="{$SITE_URL}user/adminindex.php?action=email" class="left_nav_link {if $smarty.get.action == 'email'}selected{/if}">Change Email</a></li>
+            <li><a href="{$SITE_URL}user/adminindex.php?action=changepass" class="left_nav_link {if $smarty.get.action == 'changepass'}selected{/if}">Change Password</a></li>
+            <li><a href="{$SITE_URL}user/adminindex.php?action=logout" class="left_nav_link">Logout</a></li>
+          </ul>
+        </li>
+	</ul>
+    </div>
+    <!-- xxxxxxxxx Left Panel xxxxxxxxx -->
+    <div class="right_panel">
+      {$TPL_VAR_BODY}
+    </div>
+    <!-- xxxxxxxxx Right Panel xxxxxxxxx -->
+  </div>
+  <!-- xxxxxxxxxxxxxxx Content Area xxxxxxxxxxx -->
+</div>		<div class="clear"></div>
+<div id="footer">
+  <div class="wrap">
+    <div class="four_col support">
+      <h5>Support</h5>
+      <ul>
+        <li>Vestibulum Rutrum<br />
+          <p>Nam adipiscing pretium nibh, sit amet gravida dui interdum euo.</p>
+        </li>
+        <li>Vestibulum Rutrum<br />
+          <p>Nam adipiscing pretium nibh, sit amet gravida dui interdum euo.</p>
+        </li>
+        <li>Vestibulum Rutrum<br />
+          <p>Nam adipiscing pretium nibh, sit amet gravida dui interdum euo.</p>
+        </li>
+      </ul>
+    </div>
+    <!-- xxxxxxxxxxxx Support column xxxxxxxxxx -->
+    <div class="four_col">
+      <h5>Sitemap</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#">Suppprt</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <!-- xxxxxxxxxxxx Sitemap column xxxxxxxxxx -->
+    <div class="four_col">
+      <h5>Stay in Touch</h5>
+      <ul>
+        <li class="social_icon"><a href="#" class="fb"></a><a href="#" class="twitter"></a><a href="#" class="gmail"></a><a href="#" class="skype"></a><a href="#" class="ytube"></a>
+          <div class="clear"></div>
+        </li>
+        <li><br />
+          Newsletter Signup<br />
+          <input name="" type="text" value="Enter Your Email.." />
+          <input name="" type="button" />
+        </li>
+      </ul>
+    </div>
+    <!-- xxxxxxxxxxxx Stay in Touch column xxxxxxxxxx -->
+    <div class="four_col last">
+      <h5>Copyright 2012</h5>
+      <ul>
+        <li>All Rights Reserved.</li>
+        <li><br />
+          <img src="{$ADMIN_GRAPHICS_URL}footer_logo.gif" alt="" class="right" /></li>
+      </ul>
+    </div>
+    <!-- xxxxxxxxxxxx Copyright column xxxxxxxxxx -->
+  </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>

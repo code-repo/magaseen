@@ -1,0 +1,93 @@
+<!-- Include jQuery -->
+<script src="{$SITE_URL}script/admin/jquery.js" type="text/javascript" charset="utf-8"></script>	
+<!-- Include Core Datepicker JavaScript -->
+<script src="{$SITE_URL}script/admin/ui.datepicker.js" type="text/javascript" charset="utf-8"></script>	
+<link rel="stylesheet" href="{$SITE_URL}css/admin/ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" />	
+<!-- Include Core Datepicker JavaScript -->
+<h2>Client Details</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $MESSAGE}
+<div class="w100p errMsg clear">{$MESSAGE}</div>
+{/if}
+<form name="frmRegister" method="post" action="" onsubmit="">
+<div class="row">
+	<label class="small_label">Name:<span class="req">*</span></label>
+	<input type="text" id="vName" name="vName" size="20" value="{$ARR_DATA.vName|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row">
+	<label class="small_label">RFC:<span class="req">*</span></label>
+	<input type="text" id="vRFC" name="vRFC" size="20" value="{$ARR_DATA.vRFC|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row">
+	<label class="small_label">Contact:</label>
+	<input type="text" id="vContact" name="vContact" size="20" value="{$ARR_DATA.vContact|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row"><label class="small_label">Email:<span class="req">*</span></label>
+	<input type="text" id="vEmail" name="vEmail" size="20" value="{$ARR_DATA.vEmail|stripslashes|htmlentities}" maxlength="100">
+</div>	
+{if !$smarty.get.clientid}
+<div class="row"><label class="small_label">Password:<span class="req">*</span></label>
+	<input type="password" id="vPassword" name="vPassword" size="20" value="{$ARR_DATA.vPassword|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row">
+	<label class="small_label">Confirm Password:<span class="req">*</span></label>
+	<input type="password" id="vCPassword" name="vCPassword" size="20" value="{$ARR_DATA.vCPassword|stripslashes|htmlentities}" maxlength="100">
+</div>
+{/if}
+<div class="row">
+	<label class="small_label">Country:<span class="req">*</span></label>
+	{$COUNTRIES}
+</div>
+<div class="row">
+	<label class="small_label">Zip:<span class="req">*</span></label>
+	<input type="text" id="vZip" name="vZip" size="20" value="{$ARR_DATA.vZip|stripslashes|htmlentities}" maxlength="8">
+</div>	
+<div class="row">
+	<label class="small_label">State:<span class="req">*</span></label>
+	<span id="states">{$STATES}</span>
+</div>
+<div class="row">
+	<label class="small_label">City:<span class="req">*</span></label>
+	<input type="text" id="vCity" name="vCity" size="20" value="{$ARR_DATA.vCity|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row">
+	<label class="small_label">Street Address:<span class="req">*</span></label>
+	<input type="text" id="vAddress" name="vAddress" size="20" value="{$ARR_DATA.vAddress|stripslashes|htmlentities}" maxlength="100">
+</div>
+<div class="row">
+	<label class="small_label">Colonia:</label>
+	<input type="text" id="vColonia" name="vColonia" size="20" value="{$ARR_DATA.vColonia|stripslashes|htmlentities}" maxlength="100">
+</div>	
+<div class="row">
+	<label class="small_label">Deleg Munic:</label>
+	<input type="text" id="vDelegMunic" name="vDelegMunic" size="20" value="{$ARR_DATA.vDelegMunic|stripslashes|htmlentities}" maxlength="100">
+</div>	
+<div class="row">
+	<label class="small_label">Phone/Mobile:<span class="req">*</span></label>
+	<input type="text" id="vPhone" name="vPhone" size="20" value="{$ARR_DATA.vPhone|stripslashes|htmlentities}" maxlength="100">
+</div>	
+{*
+<div class="row">
+	<label class="small_label">Total Slots:<span class="req">*</span></label>
+	<input type="text" name="iTotalSlots" value="{$ARR_DATA.iTotalSlots}" maxlength="100" />
+</div>
+<div class="row">
+	<label class="small_label">Paid Date:<span class="req">*</span></label>
+	<input type="text" name="dPaidDate" id="dPaidDate" value="{$ARR_DATA.dPaidDate}" readonly="readonly" />
+</div>
+<div class="row">
+	<label class="small_label">Reference:<span class="req">*</span></label>
+	<input type="text" name="vReference" value="{$ARR_DATA.vReference}" maxlength="100" />
+</div>
+*}
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" value="Save" class="submit_button" />
+	<input type="button" value="Cancel" class="submit_button" onclick="javascript:window.location='adminindex.php?action=clientlist';" />
+</div>
+</form>
+<script type="text/javascript" charset="utf-8">
+{literal}
+jQuery(function($){$("#dPaidDate").attachDatepicker({showOn: 'button', buttonImage: '{/literal}{$ADMIN_GRAPHICS_URL}{literal}CalendarLogo.jpg', buttonImageOnly: true,yearRange:'-2:+5',fileds_to_hide:''});});
+{/literal}
+</script>	

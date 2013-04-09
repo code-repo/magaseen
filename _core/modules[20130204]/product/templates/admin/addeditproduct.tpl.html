@@ -1,0 +1,69 @@
+<!-- Include jQuery -->
+<script src="{$SITE_URL}script/admin/jquery.js" type="text/javascript" charset="utf-8"></script>	
+<!-- Include Core Datepicker JavaScript -->
+<script src="{$SITE_URL}script/admin/ui.datepicker.js" type="text/javascript" charset="utf-8"></script>	
+<link rel="stylesheet" href="{$SITE_URL}css/admin/ui.datepicker.css" type="text/css" media="screen" title="core css file" charset="utf-8" />
+<h2>Campaign Details</h2>
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $ERROR_MSG}
+<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+<form name="frm" action="" method="post" enctype="multipart/form-data">
+<input type="hidden" name="productid" value="{$PRODUCT_ID}">
+<div class="row">
+	<label class="small_label">Name:<span class="req">*</span></label>
+	<input type="text" name="vName" maxlength="50" value="{$DATA.vName|stripslashes|htmlentities}">
+</div>
+<div class="row">
+	<label class="small_label">Client:<span class="req">*</span></label>
+	<select name="iClientId" {*onchange="getClientProducts(this.value, '{$DATA.vContentIds}');"*}>
+	<option value="0">--Select--</option>
+	{html_options values=$VALS selected=$SELECTED output=$OUTPUT}
+	</select>
+</div>
+{*
+<div class="row" id="client_products" style="display:none;">
+	<label class="small_label">Select Content:</label>
+	<div id="products"></div>
+</div>
+*}
+<div class="row">
+	<label class="small_label">Description:<span class="req">*</span></label>
+	<textarea name="vDescription" rows="5"  cols="20">{$DATA.vDescription|stripslashes}</textarea>
+</div>
+<div class="row">
+	<label class="small_label">Start Date:<span class="req">*</span></label>
+	<input type="text" name="dStartDate" id="dStartDate" value="{$DATA.dStartDate}" readonly="readonly" />
+</div>
+<div class="row">
+	<label class="small_label">End Date:<span class="req">*</span></label>
+	<input type="text" name="dEndDate" id="dEndDate" value="{$DATA.dEndDate}" readonly="readonly" />
+</div>
+<div class="row">
+	<label class="small_label">Active</label>
+	<input type="checkbox" name="iActive" {if $DATA.iActive}checked{/if} />
+</div>
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" value="Save" class="submit_button" />
+	<input type="button" value="Cancel" class="submit_button" onclick="javascript:window.location='adminindex.php?action=productlist&page={$PAGE}'" />
+</div>
+</form>
+
+<!-- Attach the datepicker to dateinput after document is ready -->
+<script type="text/javascript" charset="utf-8">
+{literal}
+jQuery(function($){$("#dStartDate").attachDatepicker({showOn: 'button', buttonImage: '{/literal}{$ADMIN_GRAPHICS_URL}{literal}CalendarLogo.jpg', buttonImageOnly: true,yearRange:'-2:+5',fileds_to_hide:''});});
+{/literal}
+</script>
+<!-- Attach the datepicker to dateinput after document is ready -->
+<script type="text/javascript" charset="utf-8">
+{literal}
+jQuery(function($){$("#dEndDate").attachDatepicker({showOn: 'button', buttonImage: '{/literal}{$ADMIN_GRAPHICS_URL}{literal}CalendarLogo.jpg', buttonImageOnly: true,yearRange:'-2:+5',fileds_to_hide:''});});
+{/literal}
+</script>
+<script type="text/javascript" charset="utf-8">
+{literal}
+getClientProducts({/literal}{$SELECTED}, '{$DATA.vContentIds}'{literal});
+{/literal}
+</script>

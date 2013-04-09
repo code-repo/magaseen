@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_TITLE}</title>
+<link href="{$SITE_URL}css/main/style.css" rel="stylesheet" />
+{if $smarty.session.lang == 'FR'}
+<link href="{$SITE_URL}css/main/style_FR.css" rel="stylesheet" />
+{/if}
+<link href="{$SITE_URL}css/main/scroll.css" rel="stylesheet" />
+  <style type="text/css">
+  {literal}
+<!--
+/** 
+ * Slideshow style rules.
+ */
+#slideshow {
+	margin:0 auto;
+	width:960px;
+	height:167px;
+	position:relative;
+}
+#slideshow #slidesContainer {
+  margin:0 auto;
+  width:960px;
+  height:167px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:540px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+  height:167px;
+}
+
+/** 
+ * Slideshow controls style rules.
+ */
+.control {
+  display:block;
+  width:39px;
+  height:167px;
+  text-indent:-10000px;
+  position:absolute;
+  cursor: pointer;
+  z-index:999999;
+}
+#leftControl { 
+  margin-top:72px;
+  margin-right:-10px;
+  left:0;
+  background:transparent url({/literal}{$GRAPHICS_URL}{literal}control_right.png) no-repeat 0 0;
+}
+#rightControl {
+	margin-top:72px;
+	margin-right:-10px;
+  top:0;
+  right:0;
+  background:transparent url({/literal}{$GRAPHICS_URL}{literal}control_left.png) no-repeat 0 0;
+}
+
+#pageContainer {
+  margin:0 auto;
+  width:960px;
+}
+
+.slide img {
+  float:right;
+  margin:0;
+}
+-->
+{/literal}
+</style>
+<script>
+var siteurl = '{$SITE_URL}';
+</script>
+<script type="text/javascript" src="{$SITE_URL}script/main/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{$SITE_URL}script/main/function.js"></script>
+<script type="text/javascript" src="{$SITE_URL}script/main/png.js"></script>
+<script>
+{literal}
+    function swapImages(){
+      var $active = $('#myGallery .active');
+      var $next = ($('#myGallery .active').next().length > 0) ? $('#myGallery .active').next() : $('#myGallery img:first');
+      $active.fadeOut(function(){
+      $active.removeClass('active');
+      $next.fadeIn().addClass('active');
+      });
+    }
+
+    $(document).ready(function(){
+      // Run our swapImages() function every 5secs
+      setInterval('swapImages()', 5000);
+	  
+    });
+
+$(document).ready(function(){
+  var currentPosition = 0;
+  var slideWidth = 960;
+  var slides = $('.slide');
+  var numberOfSlides = slides.length;
+
+  // Remove scrollbar in JS
+  $('#slidesContainer').css('overflow', 'hidden');
+
+  // Wrap all .slides with #slideInner div
+  slides
+    .wrapAll('<div id="slideInner"></div>')
+    // Float left to display horizontally, readjust .slides width
+	.css({
+      'float' : 'left',
+      'width' : slideWidth
+    });
+
+  // Set #slideInner width equal to total width of all slides
+  $('#slideInner').css('width', slideWidth * numberOfSlides);
+
+  // Insert controls in the DOM
+  $('#slideshow')
+    .prepend('<span class="control" id="leftControl">Clicking moves left</span>')
+    .append('<span class="control" id="rightControl">Clicking moves right</span>');
+  // Hide left arrow control on first load
+  manageControls(currentPosition);
+
+  // Create event listeners for .controls clicks
+  $('.control')
+    .bind('click', function(){
+    // Determine new position
+	currentPosition = ($(this).attr('id')=='rightControl') ? currentPosition+1 : currentPosition-1;
+    
+	// Hide / show controls
+    manageControls(currentPosition);
+    // Move slideInner using margin-left
+    $('#slideInner').animate({
+      'marginLeft' : slideWidth*(-currentPosition)
+    });
+  });
+
+  // manageControls: Hides and Shows controls depending on currentPosition
+  function manageControls(position){
+    // Hide left arrow if position is first slide
+	if(position==0){ $('#leftControl').hide() } else{ $('#leftControl').show() }
+	// Hide right arrow if position is last slide
+    if(position==numberOfSlides-1){ $('#rightControl').hide() } else{ $('#rightControl').show() }
+  }	
+});
+{/literal}
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+	{$TPL_VAR_TOP}
+	<div class="showcase">
+		<div id="myGallery">
+			{$TPL_VAR_BANNER_IMAGES}
+		</div>
+		<div class="newsletter">
+			<!-- <div class="floatR">
+				<input type="text"onfocus="{literal}if (this.value == 'enter your email address') {this.value=''}{/literal}" onblur="{literal}if(this.value == '') { this.value='enter your email address'}{/literal}" value="enter your email address" onkeyup="checkkeypress(event.keyCode);" name="" />
+				<a href="javascript:void(0);">join</a>
+			</div> -->
+		</div>
+	</div>
+	<div class="home-slider">
+	  <!-- Slideshow HTML -->
+  <div id="slideshow">
+    <div id="slidesContainer" style="cursor:pointer;" onclick="location.href='{$SITE_URL}cms/index.php?action=detail&pageid=10'">
+      <div class="slide"><img src="{$GRAPHICS_URL}your-color-img.jpg" style="float:left;" /></div>
+      <!-- <div class="slide"><img src="{$GRAPHICS_URL}your-color-img-1.jpg" style="float:left;" /></div> -->
+      <div class="slide"><img src="{$GRAPHICS_URL}your-color-img02.jpg" style="float:left;" /></div>
+    </div>
+  </div>
+
+  <!-- Slideshow HTML -->
+	</div>
+	<div class="image-grid">
+		<a class="img-video" href="{$SITE_URL}common/index.php?action=video"><img src="{$GRAPHICS_URL}watch-video-img-hover.jpg" /></a>
+		<a class="img-team" href="{$SITE_URL}cms/index.php?action=detail&pageid=7"><img src="{$GRAPHICS_URL}hair-team-img-hover.jpg" /></a>
+		<a class="img-star" href="{$SITE_URL}cms/index.php?action=detail&pageid=4"><img src="{$GRAPHICS_URL}style-star-img-hover.jpg" style="margin-right:0px;" /></a>
+	</div>
+	{$TPL_VAR_FOOTER}
+</div>
+</body>
+</html>

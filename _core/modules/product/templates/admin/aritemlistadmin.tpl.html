@@ -1,0 +1,163 @@
+<script language="javascript" type="text/javascript" src="{$SITE_URL}script/message.js"></script>
+<script>//<![CDATA[{literal}
+	function checkAll()
+	{
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]")
+			{
+				if(!document.frm.elements[i].disabled)
+				{
+					document.frm.elements[i].checked = document.frm.chkAll.checked;
+				}
+			}
+		}
+	}
+	function chkForm()
+	{
+		var totchecked=0;
+		flag = false;
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)
+		{
+			alert("Please select at least one value to proceed.");
+			return false;
+		}
+		if(document.frm.selAction.value == 'delete')
+		{
+			return confirmDeletion();
+		}
+		return true;
+	}
+	function confirmDeletion()
+	{
+		flag =false;		
+		for(i=0;i<document.frm.elements.length;i++)
+		{
+			if(document.frm.elements[i].type=="checkbox" && document.frm.elements[i].name=="chkPage[]" && true == document.frm.elements[i].checked)
+			{
+				flag = true;
+				break;
+			}
+		}
+		if(true == flag)
+		{
+			$action = confirm("Do you really want to delete the selected record(s)?");
+		}
+		if($action)
+		{
+			return true;
+		}
+		return false;
+	}
+//{/literal}]]></script>
+<h2>{$TOP_NAVIGATION}</h2>
+{if $smarty.session.user.vType != 'C'}
+<form name="form1" action="" method="post"  enctype="multipart/form-data">
+<div class="row">
+	<label class="small_label">Add New AR Item</label>
+</div>
+<div class="row">
+	<label class="small_label">Dataset Image:<span class="req">*</span></label>
+	{$CONTENTTYPE}
+</div>
+<div class="row">
+	<label class="small_label">Weblink:</label>
+	<input type="text" name="vWebLink" value="{$DATA.vWebLink}" maxlength="100" />
+</div>
+<div class="row">
+	<label class="small_label">Select AR Model:<span class="req">*</span></label>
+	<input type="file" name="vObject" />&nbsp;{$DATA.vObjectName|stripslashes|htmlentities}
+</div>
+{if $smarty.get.id}
+<div class="row">
+	<label class="small_label"></label>
+	<span style="margin:7px 0 5px 0;float:left;">{$DATA.dDateTime}
+</div>
+{/if}
+<div class="row">
+	<label class="small_label"></label>
+	<input type="submit" name="submit" value=" Upload " class="submit_button" onclick="document.getElementById('loader').style.display = 'block';" />	
+	<div id="loader"><img src="{$SITE_URL}graphics/admin/ajax-loader.gif" alt="Loading..." title="Loading..." /></div>
+</div>
+</form>
+{/if}
+<!-- xxxxxxxxx Grid Table xxxxxxxxx -->
+{if $ERROR_MSG}
+	<div class="w100p errMsg clear">{$ERROR_MSG}</div>
+{/if}
+{if $IS_RECORD == false}
+	<div class="w100p errMsg">No Record</div>
+{else}
+<div class="w100p">
+	<div class="new_rec"><input type="button" name="cancel" value="&laquo; Back" onclick="window.location=('{$SITE_URL}product/adminindex.php?action=contentlist&page={$PAGE}');" class="submit_button" /></div>
+	<div class="paging_div">{$PAGING}</div>
+</div>
+<form name="frm" action="" method="post" onsubmit="return chkForm();">
+<input type="hidden" name="page" value="{$PAGE}" />
+<table width="100%" cellpadding="0" cellspacing="0" class="grid">		
+<tr>
+	{if $smarty.session.user.vType != 'C'}<th class="check_list"><input type="checkbox" name="chkAll" onclick="javascript:return checkAll();"></th>{/if}
+	<th>AR-Name</th>
+	<th>Dataset-Img</th>					
+	<th>Weblink</th>					
+	<th>Date</th>					
+	{if $smarty.session.user.vType != 'C'}<th>Download</th>{/if}				
+	<th class="status">Status</th>
+</tr>
+{section name=i loop = $ARR_DATA}
+<tr>
+	{if $smarty.session.user.vType != 'C'}<td class="check_list"><input type="checkbox" name="chkPage[]" value="{$ARR_DATA[i].iId}" id="chkPage"></td>{/if}
+	<td>
+	{$ARR_DATA[i].vObjectName|stripslashes|htmlentities}
+	</td>
+	<td>{$ARR_DATA[i].vName|stripslashes|htmlentities|truncate:50:"..."}</td>
+	<td>{$ARR_DATA[i].vWebLink|stripslashes|htmlentities|truncate:50:"..."}</td>
+	<td>{$ARR_DATA[i].dDateTime}</td>
+	{if $smarty.session.user.vType != 'C'}
+	<td>
+	{if $ARR_DATA[i].iContentTypeId != 2}
+	<a href="{$SITE_URL}product/index.php?action=download&filename={$ARR_DATA[i].vObject}">Download</a>
+	{/if}
+	</td>
+	{/if}
+	
+	<td class="status" align="center">{if $smarty.session.user.vType != 'C'}
+	<a href="{$SITE_URL}product/adminindex.php?action=aritemlist&contentid={$smarty.get.contentid}&id={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0"><img src="{$ADMIN_GRAPHICS_URL}icon_edit.png" alt="Edit" title="Edit" border="0"></a>
+	<a href="{$SITE_URL}product/adminindex.php?action=deletearitem&contentid={$smarty.get.contentid}&id={$ARR_DATA[i].iId}&{$EXTRA_ATT}" border="0" onclick="javascript:return confirm('Do you really want to delete this record?');">
+	<img src="{$ADMIN_GRAPHICS_URL}icon_delete.png" alt="Delete" title="Delete" border="0" /></a>{/if}
+	{if $ARR_DATA[i].iActive == 1}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_status.png" alt="Active" title="Active">
+	{else}
+	<img src="{$ADMIN_GRAPHICS_URL}icon_inactive.gif" alt="Inactive" title="Inactive">
+	{/if}
+	</td>
+</tr>			
+{/section}			
+</table>		
+{if $smarty.session.user.vType != 'C'}
+<div class="row active">
+<select name="selAction" class="left">
+	<option value="activate">Activate</option>
+	<option value="deactivate">Deactivate</option>
+	<option value="delete">Delete</option>
+</select>
+<input name="" type="submit" value="" class="go_btn left" />
+</div>
+{/if}
+{/if}
+</form>			
+{if $smarty.post.iContentTypeId}
+<script type="text/javascript" charset="utf-8">
+{literal}
+setInputType({/literal}{$smarty.post.iContentTypeId}{literal});
+</script>
+{/literal}
+{/if}			
